@@ -1,11 +1,11 @@
- import React from 'react';
- import './BlocklyComponent.css';
- import {useEffect, useRef} from 'react';
-
+ import React, {useEffect, useRef, useCallback}  from 'react';
  import Blockly from 'blockly/core';
  import BlocklyJS from 'blockly/javascript';
  import locale from 'blockly/msg/en';
  import 'blockly/blocks';
+
+ import './BlocklyComponent.css';
+
 
  Blockly.setLocale(locale);
 
@@ -15,36 +15,44 @@
   const toolbox = useRef();
   let primaryWorkspace = useRef();
 
-  const generateCode = () => {
+  const generateCode = (event) => {
     var code = BlocklyJS.workspaceToCode(
       primaryWorkspace.current
     );
-    console.log(typeof code);
-    config.codeHandler(code);
+    codeHandler(code);
   };
 
   useEffect(() => {
-    const { initialXml, children, ...rest } = config;
-      primaryWorkspace.current = Blockly.inject(
-        blocklyDiv.current,
-        {
-          toolbox: toolbox.current,
-          ...rest
-        },
-      );
+    console.log('new block')
 
-      if (initialXml) {
-          Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(initialXml), primaryWorkspace.current);
-      }
+    const { initialXml, children, ...rest } = config;
+
+    primaryWorkspace.current = Blockly.inject(
+      blocklyDiv.current,
+      {
+        toolbox: toolbox.current,
+        ...rest
+      },
+    );
+
+    if (initialXml) {
+      Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(initialXml), primaryWorkspace.current);
+    }
+
+    primaryWorkspace.current.addChangeListener(generateCode);
+
   }, [primaryWorkspace, toolbox, blocklyDiv, config]);
 
   return (
     <div className='BlocklyComponent'>
-      <button onClick={generateCode}>Convert</button>
-      <div ref={blocklyDiv} id="blocklyDiv" />
+      {/* <button onClick={generateCode}>Convert</button> */}
+      <div
+        ref={blocklyDiv}
+        id="blocklyDiv">
+      </div>
       <div
         className='blockly-toolbox'
-        // style={{ display: 'none' }}
+        style={{ display: 'none' }}
         ref={toolbox}>
           {children}
       </div>

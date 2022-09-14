@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import BlocklyComponent from './Blockly/BlocklyComponent.jsx';
+import BlocklyComponent from './Blockly/BlocklyComponent/BlocklyComponent.jsx';
+import BlocklyCode from './Blockly/BlocklyCode/BlocklyCode.jsx';
 import { Block, Value, Field, Shadow } from './Blockly/index.js';
 
 // import './blocks/customblocks';
@@ -43,7 +44,6 @@ const App = () =>{
         {/* <button onClick={generateCode}>Convert</button> */}
         <BlocklyComponent config={blocklyComponentConfig} codeHandler={getCode}>
           <Block type="controls_ifelse" />
-
           <Block type="controls_ifelse" />
             <Block type="logic_compare" />
             <Block type="logic_operation" />
@@ -58,6 +58,11 @@ const App = () =>{
             <Block type="logic_negate" />
             <Block type="logic_boolean" />
         </BlocklyComponent>
+        <BlocklyCode code={currentCode}/>
+      </div>
+
+      <div>
+
       </div>
 
     </div>
