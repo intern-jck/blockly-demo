@@ -11,10 +11,10 @@
 
   return (
     <div className='BlocklyCode'>
-      <button onClick={downloadHandler}>DOWNLOAD</button>
       <div className='blockly-current-code'>
         {code}
       </div>
+      <button onClick={downloadHandler}>DOWNLOAD</button>
     </div>
   );
 }

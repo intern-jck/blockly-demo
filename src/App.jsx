@@ -1,14 +1,34 @@
 import React, {useState, useEffect} from 'react';
 import BlocklyComponent from './Blockly/BlocklyComponent/BlocklyComponent.jsx';
 import BlocklyCode from './Blockly/BlocklyCode/BlocklyCode.jsx';
-import { Block, Value, Field, Shadow } from './Blockly/index.js';
-
-// import './blocks/customblocks';
-import './generator/generator';
-
 import './App.css';
 
-import BlocklyJS from 'blockly/javascript';
+import Blockly from 'blockly/core';
+
+// Can create custom styling themes
+const myTheme = {
+  'base': Blockly.Themes.Classic,
+  'componentStyles': {
+    'workspaceBackgroundColour': 'white',
+    'toolboxBackgroundColour': 'lightgrey',
+    'toolboxForegroundColour': 'black',
+    'flyoutBackgroundColour': 'lightgrey',
+    'flyoutForegroundColour': 'black',
+    'flyoutOpacity': 1,
+    'insertionMarkerColour': '#fff',
+    'insertionMarkerOpacity': 0.8,
+    'scrollbarColour': 'black',
+    'scrollbarOpacity': 0.9,
+    'cursorColour': 'lightgreen',
+  },
+  // This should work but doesn't.  Not sure why....
+  // Can style in css file.
+  // 'fontStyle': {
+  //   "family": "Georgia, serif",
+  //   "weight": "bold",
+  //   "size": 20,
+  // },
+}
 
 const blocklyComponentConfig = {
   readOnly: false,
@@ -19,10 +39,18 @@ const blocklyComponentConfig = {
     drag: true,
     wheel: true,
   },
-  initialXml: `<xml xmlns="http://www.w3.org/1999/xhtml"><block type="controls_ifelse" x="0" y="0"></block></xml>`,
+  initialXml: `<xml xmlns="http://www.w3.org/1999/xhtml"></xml>`,
+  theme: myTheme,
+  zoom: {
+    controls: true,
+    wheel: true,
+    startScale: 1.0,
+    maxScale: 3,
+    minScale: 0.3,
+    scaleSpeed: 1.2,
+    pinch: true
+  },
 };
-
-
 
 const App = () =>{
   const [currentCode, setCurrentCode] = useState('');
@@ -39,32 +67,10 @@ const App = () =>{
           Blockly React
         </h1>
       </div>
-
       <div className='app-content'>
-        {/* <button onClick={generateCode}>Convert</button> */}
-        <BlocklyComponent config={blocklyComponentConfig} codeHandler={getCode}>
-          <Block type="controls_ifelse" />
-          <Block type="controls_ifelse" />
-            <Block type="logic_compare" />
-            <Block type="logic_operation" />
-            <Block type="controls_repeat_ext">
-              <Value name="TIMES">
-                <Shadow type="math_number">
-                  <Field name="NUM">10</Field>
-                </Shadow>
-              </Value>
-            </Block>
-            <Block type="logic_operation" />
-            <Block type="logic_negate" />
-            <Block type="logic_boolean" />
-        </BlocklyComponent>
+        <BlocklyComponent config={blocklyComponentConfig} codeHandler={getCode} />
         <BlocklyCode code={currentCode}/>
       </div>
-
-      <div>
-
-      </div>
-
     </div>
   )
 }

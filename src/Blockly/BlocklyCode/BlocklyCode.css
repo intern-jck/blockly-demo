@@ -3,13 +3,19 @@
   padding: 1em;
   box-sizing: border-box;
   width: 40vw;
-  height: 80%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+.BlocklyCode button {
+  font-size: xx-large;
+}
+
 .blockly-current-code {
   white-space: pre;
   border: 4px solid green;
+  width: 80%;
+  height: 80%;
 }

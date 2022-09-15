@@ -1,11 +1,9 @@
 import React from 'react';
 
 const Block = (p) => {
-    // console.log('Block', p)
     const { children, ...props } = p;
     props.is = "blockly";
-    // console.log('props', props)
-    return React.createElement("block", props, children); // type 'block' comes from blockly api
+    return React.createElement("block", props, children);
 };
 
 const Category = (p) => {
