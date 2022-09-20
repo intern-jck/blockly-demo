@@ -5,27 +5,23 @@ module.exports = {
   entry: './src/index.jsx',
   output: {
     path: path.join(__dirname, 'public'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   module: {
     rules: [
       {
         test: /\.(jsx|js)$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
       },
       {
-        test: /\.css$/i,
-        use: ['style-loader','css-loader']
-      },
-      {
-        test: /\.(woff|woff2|eot|ttf|otf)$/i,
-        type: 'asset/resource',
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
-      },
+      }
     ]
   },
   devtool: 'eval-cheap-module-source-map',
@@ -36,4 +32,4 @@ module.exports = {
     compress: true,
     port: 8080,
   },
-}
+};

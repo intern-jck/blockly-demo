@@ -1,26 +1,27 @@
 .App {
-  border: 10px solid black;
-  margin: 0;
-  padding: 1em;
+  border: 8px solid orange;
   box-sizing: border-box;
-}
-
-.app-header {
-  border: 4px solid black;
+  width: 100%;
+  font-family: 'Courier New', Courier, monospace;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
 
-.App-link {
-  color: red;
+.app-header {
+  /* border: 4px solid black; */
+  text-align: center;
 }
 
-#blocklyDiv {
+.app-content {
   border: 4px solid blue;
-  height: 50%;
-  width: 100%;
-  position: absolute;
-  bottom: 0;
+  padding: 1em;
+  box-sizing: border-box;
+  width: 96vw;
+  height: 90vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 4em;
 }
